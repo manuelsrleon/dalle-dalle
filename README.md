@@ -6,4 +6,4 @@
 - Manuel "manuelsrleon" Santamariña
 - Sergio "salvari" Alvariño
 
-### ...with love, from BricoLabs! ;)
+### ...con agarimo, dende BricoLabs! ;)
