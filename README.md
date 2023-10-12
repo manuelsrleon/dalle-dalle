@@ -8,5 +8,9 @@
 - Felo "felocho" Couto 
 - Manuel "manuelsrleon" Santamariña
 - Sergio "salvari" Alvariño
-
+###
+## Tamos aínda escollendo tecnoloxía:
+Propostas de tecnoloxía:
+ - React Native
+ - PyGTK
 ### ...con agarimo, dende BricoLabs! ;)
