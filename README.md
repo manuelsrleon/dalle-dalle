@@ -5,12 +5,6 @@
  - [Penpot, prototipo funcional](https://design.penpot.app/#/workspace/52961d58-0a92-80c2-8003-38c06914bbe4/224aa6d5-714a-812f-8002-2e634b209e03?page-id=224aa6d5-714a-812f-8002-2e634b209e04)
 
 ## Equipo dalle-dalle
-- Felo "felocho" Couto 
-- Manuel "manuelsrleon" Santamariña
-- Sergio "salvari" Alvariño
+//TODO add members
 ###
-## Tamos aínda escollendo tecnoloxía:
-Propostas de tecnoloxía:
- - React Native
- - PyGTK
 ### ...con agarimo, dende BricoLabs! ;)
