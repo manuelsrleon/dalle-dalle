@@ -1,10 +1,34 @@
 # dalle-dalle
-  Dalle-Dalle é un programa de acción - reacción deseñado para as primeiras interaccións dos mais pequenos co ordenador a través de obxectos reais con etiquetas RFID.  Trátase de aproveitar as capacidades multimedia para captar a atención, despertar o interese e exercitar a resposta  voluntaria: peticións, asociacións loxicas, sons, etc.
 
-## Enlaces de interés
- - [Penpot, prototipo](https://design.penpot.app/#/workspace/52961d58-0a92-80c2-8003-38c06914bbe4/224aa6d5-714a-812f-8002-2e634b209e03?page-id=224aa6d5-714a-812f-8002-2e634b209e04)
+An Electron application with React and TypeScript
 
-## Equipo dalle-dalle
-//TODO add members
-###
-### ...con agarimo, dende BricoLabs! ;)
+## Recommended IDE Setup
+
+- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
+## Project Setup
+
+### Install
+
+```bash
+$ npm install
+```
+
+### Development
+
+```bash
+$ npm run dev
+```
+
+### Build
+
+```bash
+# For windows
+$ npm run build:win
+
+# For macOS
+$ npm run build:mac
+
+# For Linux
+$ npm run build:linux
+```
