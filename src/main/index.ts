@@ -1,7 +1,7 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
+const FileRepository = require('./common/fileRepository.mjs')
 
 function createWindow(): void {
   // Create the browser window.
@@ -42,6 +42,10 @@ app.whenReady().then(() => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
 
+  const homeDir = app.getPath('home');
+
+  console.log(homeDir);
+
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
   // see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils
@@ -52,6 +56,15 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
+  ipcMain.handle('load-json', async (event, filePath) => {
+    const fileRepo = new FileRepository(filePath);
+    try {
+        const data = await fileRepo.loadJsonFile();
+        return data; // Send the JSON data back to the renderer process
+    } catch (err) {
+        return { error: err.message }; // Send error back to the renderer
+    }
+});
   createWindow()
 
   app.on('activate', function () {
