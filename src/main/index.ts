@@ -1,7 +1,29 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-const FileRepository = require('./common/fileRepository.mjs')
+import { readdir } from 'fs/promises';
+import path from 'path';
+import { createScenarioTable } from './db_schema';
+import { testScenario1 } from './test_scenario.sql';
+
+const sqlite3 = require('sqlite3').verbose();
+
+const db = new sqlite3.Database('userData');
+
+db.serialize(() => {
+  console.log("Attempting to create SCENARIO table:")
+  console.log(createScenarioTable);
+  db.run(createScenarioTable);
+  console.log("Attempting to insert SCENARIO test data:")
+  console.log(testScenario1);
+  const stmt = db.prepare(testScenario1);
+  stmt.run()
+  stmt.finalize();
+
+  db.each("SELECT * from SCENARIO ", (err, row) => {
+      console.log(row);
+  });
+});
 
 function createWindow(): void {
   // Create the browser window.
@@ -10,7 +32,6 @@ function createWindow(): void {
     height: 670,
     show: false,
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
@@ -56,15 +77,10 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
-  ipcMain.handle('load-json', async (event, filePath) => {
-    const fileRepo = new FileRepository(filePath);
-    try {
-        const data = await fileRepo.loadJsonFile();
-        return data; // Send the JSON data back to the renderer process
-    } catch (err) {
-        return { error: err.message }; // Send error back to the renderer
-    }
-});
+  ipcMain.handle('load-saved-scenarios', async () => {
+    console.log(await readdir(path.resolve(__dirname)));
+    //Here we must read the userData. 
+  });
   createWindow()
 
   app.on('activate', function () {
@@ -78,6 +94,7 @@ app.whenReady().then(() => {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
+  db.close();
   if (process.platform !== 'darwin') {
     app.quit()
   }

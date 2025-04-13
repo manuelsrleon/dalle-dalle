@@ -1,31 +1,35 @@
-import Versions from './components/Versions'
-import electronLogo from './assets/electron.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import type Scenario from './model/scenario/scenario';
+import ScenarioBanner from './components/ScenarioBanner';
+import "./global.css";
+
 
 function App(): JSX.Element {
-  const [jsonData, setJsonData] = useState(null);
   const [error, setError] = useState(null);
+  const [scenarios, setScenarios] = useState<Scenario[]>([]);
 
-  const loadJson = async () => {
-    try{
-      const data = await window.electron.loadJson('/home/manuelsrleon');
-      setJsonData(data);
-    }catch(err : any){
+  // useEffect(() => {
+  //   loadSavedScenarios();
+  // })
+  const loadSavedScenarios = async () => {
+    try {
+      window.electron.loadSavedScenarios().then(
+        (data) => { console.log(data); setScenarios(data) }
+      );
+
+    } catch (err: any) {
       setError(err.message);
     }
   }
-
-  const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
-
   return (
     <>
+      <button onClick={loadSavedScenarios}>Load</button>
+      <div className="action">
+        {scenarios.map((scenario) => (
+          <ScenarioBanner scenario={scenario}></ScenarioBanner>
+        ))}
+      </div>
 
-        <div className="action">
-          <a target="_blank" rel="noreferrer" onClick={loadJson}>
-            Load Json
-          </a>
-        </div>
-      <Versions></Versions>
     </>
   )
 }

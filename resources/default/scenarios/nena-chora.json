@@ -1,0 +1,20 @@
+{
+    "type": "STANDARD",
+    "title": "Axuda á nena!",
+    "challenge": {
+        "challengeText": "¿Que necesita a nena?",
+        "challengeMedia": "nena.png",
+        "challengeSound": "chorar.ogg"
+    },
+    "onSuccess": {
+        "successText": "Porque necesita ir ó baño!",
+        "successMedia": "abejita.mp4",
+        "successSound": "campana.ogg",
+        "successObjectRfidCode": ""
+    },
+    "onFailure": {
+        "failureText": "Ups! Iso non é!",
+        "failureMedia": "perigo.png",
+        "failureSound": "incorrecto.ogg"
+    }
+}
