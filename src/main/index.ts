@@ -5,7 +5,6 @@ import { readdir } from 'fs/promises';
 import path from 'path';
 import { createScenarioTable } from './db_schema';
 import { testScenario1 } from './test_scenario.sql';
-
 const sqlite3 = require('sqlite3').verbose();
 
 const db = new sqlite3.Database('userData');
@@ -14,15 +13,16 @@ db.serialize(() => {
   console.log("Attempting to create SCENARIO table:")
   console.log(createScenarioTable);
   db.run(createScenarioTable);
+  
   console.log("Attempting to insert SCENARIO test data:")
   console.log(testScenario1);
   const stmt = db.prepare(testScenario1);
   stmt.run()
   stmt.finalize();
 
-  db.each("SELECT * from SCENARIO ", (err, row) => {
-      console.log(row);
-  });
+  db.each("SELECT * from SCENARIO", (err, row) => 
+    console.log(row)
+  )
 });
 
 function createWindow(): void {
@@ -77,9 +77,21 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
-  ipcMain.handle('load-saved-scenarios', async () => {
-    console.log(await readdir(path.resolve(__dirname)));
-    //Here we must read the userData. 
+  ipcMain.handle('load-saved-scenarios', async (event, args) => {
+  
+    
+    const savedScenarios = await new Promise<any[]>((resolve,reject) => {
+      db.all("SELECT * from SCENARIO ", (err, rows) => {
+
+        if(err){
+          reject(err);
+        }else{
+          resolve(rows);
+        }
+      });
+    })
+    return savedScenarios;
+
   });
   createWindow()
 

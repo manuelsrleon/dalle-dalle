@@ -10,7 +10,7 @@ const api = {}
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', {
-      loadJson: async (filePath) => ipcRenderer.invoke('load-saved-scenarios', filePath)})
+      loadSavedScenarios: async () => ipcRenderer.invoke('load-saved-scenarios')})
     contextBridge.exposeInMainWorld('api', api)
     
   } catch (error) {
@@ -18,7 +18,7 @@ if (process.contextIsolated) {
   }
 } else {
   // @ts-ignore (define in dts)
-  window.electron = {...electronAPI, loadJson: async (filePath) => ipcRenderer.invoke('load-saved-scenarios', filePath)}
+  window.electron = {...electronAPI, loadSavedScenarios: async () => ipcRenderer.invoke('load-saved-scenarios')}
   // @ts-ignore (define in dts)
   window.api = api
 }
