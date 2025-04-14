@@ -2,6 +2,6 @@ export default interface ChallengeData {
     prompt: "Que necesita a nena?",
     mediaPath: "", //
     soundPath: "",
-    maxTime: "",
-    RfidObjectCode: "abc123"
+    maxTime: 0,
+    rfidObjectCode: "abc123"
 }

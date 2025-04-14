@@ -2,21 +2,27 @@ import { useEffect, useState } from 'react'
 import type Scenario from './model/scenario/scenario';
 import ScenarioBanner from './components/ScenarioBanner';
 import "./global.css";
+import "./app.css"
 import ChallengeData from './model/scenario/challenge-data';
+import SuccessData from './model/scenario/success-data';
+import FailureData from './model/scenario/failure-data';
 
 
 function App(): JSX.Element {
   const [error, setError] = useState(null);
   const [scenarios, setScenarios] = useState<Scenario[]>([]);
 
-  // useEffect(() => {
-  //   loadSavedScenarios();
-  // })
+  useEffect(() => {
+    loadSavedScenarios();
+  }, [])
   const loadSavedScenarios = async () => {
     try {
-      const rawData = await window.electron.loadSavedScenarios();
-      const mappedScenarios: Scenario[] = rawData.map(
-      )
+      const scenarios =
+        await window.electron
+        .loadSavedScenarios()
+        .then(results =>  Promise.all(results.map(scenarioQueryResultToScenarioMapper)))
+      console.log(scenarios);
+      setScenarios(scenarios);
     } catch (err: any) {
       setError(err.message);
     }
@@ -43,21 +49,36 @@ function App(): JSX.Element {
       type: scenarioQueryResult.type,
       title: scenarioQueryResult.title,
       subtitle: scenarioQueryResult.subtitle,
-      challengeData: {} as ChallengeData
+      challenge: {
+        prompt: scenarioQueryResult.challenge_prompt,
+        mediaPath: scenarioQueryResult.challenge_mediaPath,
+        soundPath: scenarioQueryResult.success_soundPath,
+        maxTime: scenarioQueryResult.challenge_maxTime,
+        rfidObjectCode: scenarioQueryResult.challenge_rfidObjectCode
+      } as ChallengeData,
+      successData: {
+        text: scenarioQueryResult.success_text,
+        mediaPath: scenarioQueryResult.success_mediaPath,
+        soundPath: scenarioQueryResult.success_soundPath
+      } as SuccessData,
+      failureData: {
+        text: scenarioQueryResult.failure_text,
+        mediaPath: scenarioQueryResult.failure_mediaPath,
+        soundPath: scenarioQueryResult.failure_soundPath
+      } as FailureData,
+      settings: undefined
     }
-
-    return {
-
-    } as Scenario;
+    console.log(mappedScenario);
+    return mappedScenario;
   }
   return (
     <>
-      <button onClick={loadSavedScenarios}>Load</button>
-      <div className="action">
-        {scenarios.map((scenario) => (
-          <ScenarioBanner scenario={scenario}></ScenarioBanner>
-        ))}
-      </div>
+      {/* <button onClick={loadSavedScenarios}>Load</button> */}
+        <div className="scenario-grid">
+          {scenarios.map((scenario) => (
+            <ScenarioBanner scenario={scenario}></ScenarioBanner>
+          ))}
+        </div>
 
     </>
   )

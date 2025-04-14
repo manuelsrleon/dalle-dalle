@@ -10,5 +10,5 @@ export default interface Scenario {
     challenge: ChallengeData,
     successData: SuccessData,
     failureData: FailureData,
-    settings: ScenarioSettings
+    settings: ScenarioSettings | undefined
 }

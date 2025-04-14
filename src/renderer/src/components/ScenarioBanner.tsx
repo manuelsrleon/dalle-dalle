@@ -8,7 +8,7 @@ function ScenarioBanner({scenario}): JSX.Element {
 
   return (
     <div className="scenario-banner">
-      <img src={scenario.challenge.mediaPath} alt="" />
+      <img className="scenario-img" src={scenario.challenge.mediaPath} alt="" />
       <div className="scenario-description">
         <h5 className="scenario-title">
           {scenario.title}
