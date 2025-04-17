@@ -37,16 +37,24 @@
     display: flex;
     flex-direction: row;
     background-color: white;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    width: 80%;
-    height: 80%;
-    margin:auto;
+    width: 90%;
+    height: 90%;
     box-shadow: 5px 5px 10px 10px 10px black;
 }
 .scenario-page-success-img, .scenario-page-failure-img{
-    
+    margin:2rem;
 }
 .scenario-page-success-text, .scenario-page-success {
-    font-size: xx-large;
+    font-size: 5rem;
 
+}
+
+.scenario-page-success-continue-button {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    background-color: blue;
 }
