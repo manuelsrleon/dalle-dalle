@@ -33,3 +33,20 @@
     color: white;
     
 }
+.scenario-page-success-modal, .scenario-page-failure-modal {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    margin:auto;
+    box-shadow: 5px 5px 10px 10px 10px black;
+}
+.scenario-page-success-img, .scenario-page-failure-img{
+    
+}
+.scenario-page-success-text, .scenario-page-success {
+    font-size: xx-large;
+
+}

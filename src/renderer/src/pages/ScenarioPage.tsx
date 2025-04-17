@@ -28,6 +28,22 @@ export const ScenarioPage = () =>  {
     }
     return (
         <div className="scenario-page-container">
+            <div className="scenario-page-success-modal">
+                <img className="scenario-page-success-img"
+                    src={scenario?.successData.mediaPath} alt={scenario?.successData.mediaPath}>
+                </img>
+                <div className="scenario-page-success-text">
+                    {scenario?.successData.text}
+                </div>
+            </div>
+            <div className="scenario-page-failure-modal">
+                <img className= "scenario-page-success-img" 
+                    src={scenario?.failureData.mediaPath} alt={scenario?.failureData.mediaPath}>
+                </img>
+                <div className="scenario-page-failure-text">
+                    {scenario?.failureData.text}
+                </div>
+            </div>
             {/* <img src={} alt="" /> */}
             {!isPlaying && scenario?
             <div className="scenario-page-cover">
@@ -48,6 +64,5 @@ export const ScenarioPage = () =>  {
                 </div> */}
             </div>}
         </div>
-        
     )
 } 
