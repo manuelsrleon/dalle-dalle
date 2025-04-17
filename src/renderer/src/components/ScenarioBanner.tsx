@@ -1,12 +1,14 @@
 import Scenario from "@renderer/model/scenario/scenario";
 
 import "./scenario.css";
+import { Link } from "react-router";
 
 function ScenarioBanner({scenario}): JSX.Element {
   // const [scenario, setScenario] = useState<Scenario>();
-
+  
 
   return (
+    <Link to={"/scenarios/"+scenario.id}>
     <div className="scenario-banner">
       <img className="scenario-img" src={scenario.challenge.mediaPath} alt="" />
       <div className="scenario-description">
@@ -18,6 +20,7 @@ function ScenarioBanner({scenario}): JSX.Element {
         </h6>
       </div>
     </div>
+    </Link>
   )
 }
 

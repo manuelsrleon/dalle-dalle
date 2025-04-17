@@ -6,7 +6,22 @@
     padding:1rem;
     border-radius: 1rem;
 }
+
+.scenario-banner:hover {
+    filter: brightness(0.90);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+.scenario-banner:active {
+    filter: brightness(0.80);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
 .scenario-img {
     min-height: 6rem;
     background-color: #0000;
+}
+a {
+    text-decoration: none;
+    color: black;
 }

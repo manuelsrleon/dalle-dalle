@@ -4,6 +4,7 @@ import FailureData from "./failure-data";
 import ScenarioSettings from "./scenario-settings";
 
 export default interface Scenario {
+    id: string;
     type?: string,
     title: string,
     subtitle?: string,

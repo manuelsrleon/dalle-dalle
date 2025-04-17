@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import type Scenario from './model/scenario/scenario';
+import type Scenario from '../../common/model/scenario/scenario';
 import ScenarioBanner from './components/ScenarioBanner';
 import "./global.css";
 import "./app.css"
-import ChallengeData from './model/scenario/challenge-data';
-import SuccessData from './model/scenario/success-data';
-import FailureData from './model/scenario/failure-data';
+import ChallengeData from '../../common/model/scenario/challenge-data';
+import SuccessData from '../../common/model/scenario/success-data';
+import FailureData from '../../common/model/scenario/failure-data';
 
 
 function App(): JSX.Element {
@@ -29,6 +29,7 @@ function App(): JSX.Element {
   }
 
   type ScenarioQueryResult = {
+    rowid: string;
     type: string;
     title: string;
     subtitle: string;
@@ -46,6 +47,7 @@ function App(): JSX.Element {
   const scenarioQueryResultToScenarioMapper = async (scenarioQueryResult: ScenarioQueryResult) => {
     let mappedScenario: Scenario = {} as Scenario;
     mappedScenario = {
+      id: scenarioQueryResult.rowid,
       type: scenarioQueryResult.type,
       title: scenarioQueryResult.title,
       subtitle: scenarioQueryResult.subtitle,

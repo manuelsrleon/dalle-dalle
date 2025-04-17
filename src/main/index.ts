@@ -1,10 +1,14 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import { readdir } from 'fs/promises';
-import path from 'path';
 import { createScenarioTable } from './db_schema';
 import { testScenario1 } from './test_scenario.sql';
+import Scenario from '../common/model/scenario/scenario';
+import ChallengeData from '../common/model/scenario/challenge-data';
+import FailureData from '../common/model/scenario/failure-data';
+import SuccessData from '../common/model/scenario/success-data';
+
+
 const sqlite3 = require('sqlite3').verbose();
 
 const db = new sqlite3.Database('userData');
@@ -81,7 +85,7 @@ app.whenReady().then(() => {
   
     
     const savedScenarios = await new Promise<any[]>((resolve,reject) => {
-      db.all("SELECT * from SCENARIO ", (err, rows) => {
+      db.all("SELECT rowid, * from SCENARIO ", (err, rows) => {
 
         if(err){
           reject(err);
@@ -93,6 +97,62 @@ app.whenReady().then(() => {
     return savedScenarios;
 
   });
+
+  ipcMain.handle('load-scenario', async (event, args) => {
+    
+    let scenarioId = args['scenarioId'];
+
+    const scenarioQR = await db.get(`SELECT rowid, * from SCENARIO where rowid = ${scenarioId}`);
+
+    return scenarioQueryResultToScenarioMapper(scenarioQR);
+  })
+  
+  type ScenarioQueryResult = {
+    rowid: string;
+    type: string;
+    title: string;
+    subtitle: string;
+    challenge_prompt: string;
+    challenge_mediaPath: string;
+    challenge_maxTime: number;
+    challenge_rfidObjectCode: string;
+    success_text: string;
+    success_mediaPath: string;
+    success_soundPath: string;
+    failure_text: string;
+    failure_mediaPath: string;
+    failure_soundPath: string;
+  }
+
+  const scenarioQueryResultToScenarioMapper = async (scenarioQueryResult: ScenarioQueryResult) => {
+    let mappedScenario: Scenario = {} as Scenario;
+    mappedScenario = {
+      id: scenarioQueryResult.rowid,
+      type: scenarioQueryResult.type,
+      title: scenarioQueryResult.title,
+      subtitle: scenarioQueryResult.subtitle,
+      challenge: {
+        prompt: scenarioQueryResult.challenge_prompt,
+        mediaPath: scenarioQueryResult.challenge_mediaPath,
+        soundPath: scenarioQueryResult.success_soundPath,
+        maxTime: scenarioQueryResult.challenge_maxTime,
+        rfidObjectCode: scenarioQueryResult.challenge_rfidObjectCode
+      } as ChallengeData,
+      successData: {
+        text: scenarioQueryResult.success_text,
+        mediaPath: scenarioQueryResult.success_mediaPath,
+        soundPath: scenarioQueryResult.success_soundPath
+      } as SuccessData,
+      failureData: {
+        text: scenarioQueryResult.failure_text,
+        mediaPath: scenarioQueryResult.failure_mediaPath,
+        soundPath: scenarioQueryResult.failure_soundPath
+      } as FailureData,
+      settings: undefined
+    }
+    console.log(mappedScenario);
+    return mappedScenario;
+  }
   createWindow()
 
   app.on('activate', function () {

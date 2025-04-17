@@ -10,7 +10,10 @@ const api = {}
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', {
-      loadSavedScenarios: async () => ipcRenderer.invoke('load-saved-scenarios')})
+      loadSavedScenarios: async () => ipcRenderer.invoke('load-saved-scenarios'),
+      loadSavedScenario: async () => ipcRenderer.invoke('load-scenario')
+    },
+      )
     contextBridge.exposeInMainWorld('api', api)
     
   } catch (error) {
@@ -18,7 +21,10 @@ if (process.contextIsolated) {
   }
 } else {
   // @ts-ignore (define in dts)
-  window.electron = {...electronAPI, loadSavedScenarios: async () => ipcRenderer.invoke('load-saved-scenarios')}
+  window.electron = {...electronAPI, 
+    loadSavedScenarios: async () => ipcRenderer.invoke('load-saved-scenarios'),
+    loadScenario: async (scenarioId: string) => ipcRenderer.invoke('load-scenario', scenarioId)
+  }
   // @ts-ignore (define in dts)
   window.api = api
 }
