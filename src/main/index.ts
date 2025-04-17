@@ -24,10 +24,6 @@ db.serialize(() => {
   const stmt = db.prepare(testScenario1);
   stmt.run()
   stmt.finalize();
-
-  db.each("SELECT * from SCENARIO", (err, row) => 
-    console.log(row)
-  )
 });
 
 function createWindow(): void {
@@ -101,7 +97,7 @@ app.whenReady().then(() => {
 
   ipcMain.handle('load-scenario', async (event, scenarioId) => {
     return new Promise((resolve, reject) => {
-      db.get(`SELECT rowid, * FROM SCENARIO WHERE rowid = ?`, [scenarioId], (err, row) => {
+      db.get(`SELECT rowid, * FROM SCENARIO WHERE rowid = ${scenarioId}`,[],(err, row) => {
         if (err) {
           console.error("DB error:", err);
           reject(err);
@@ -139,6 +135,7 @@ app.whenReady().then(() => {
 
   const scenarioQueryResultToScenarioMapper = async (scenarioQueryResult: ScenarioQueryResult) => {
     let mappedScenario: Scenario = {} as Scenario;
+    console.log("rowid:",scenarioQueryResult.rowid);
     mappedScenario = {
       id: scenarioQueryResult.rowid,
       type: scenarioQueryResult.type,
@@ -163,6 +160,7 @@ app.whenReady().then(() => {
       } as FailureData,
       settings: undefined
     }
+    console.log("mappedScenario, queryResult",mappedScenario, scenarioQueryResult);
     return mappedScenario;
   }
   createWindow()

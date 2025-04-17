@@ -76,7 +76,7 @@ function App(): JSX.Element {
       {/* <button onClick={loadSavedScenarios}>Load</button> */}
         <div className="scenario-grid">
           {scenarios.map((scenario) => (
-            <ScenarioBanner scenario={scenario}></ScenarioBanner>
+            <ScenarioBanner key={scenario.id} scenario={scenario}></ScenarioBanner>
           ))}
         </div>
 

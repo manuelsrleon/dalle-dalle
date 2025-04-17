@@ -13,28 +13,40 @@ export const ScenarioPage = () =>  {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
     useEffect(() => {
+        console.log("scenarioId:",scenarioId);
         setIsLoading(true);
         if(scenarioId){
             window.electron.loadScenario(scenarioId).then( 
-                results => setScenario(results as Scenario), 
+                results => {setScenario(results as Scenario);console.log("scenario:",scenario)}, 
                 reject => setError(reject)
             );
         }
     },[])
 
+    const playScenario = () => {
+        setIsPlaying(true);
+    }
     return (
         <div className="scenario-page-container">
             {/* <img src={} alt="" /> */}
-            {!isPlaying?
+            {!isPlaying && scenario?
             <div className="scenario-page-cover">
                 <ScenarioBanner scenario={scenario}></ScenarioBanner>
-                <button className="scenario-page-play-scenario">
-                    <img></img>
+                <button className="scenario-page-play-scenario" onClick={playScenario}>
                     Reproducir
                 </button>
             </div>
             :
-            <div className=""></div>}
+            
+            <div className="scenario-page-prompt">
+                <img src={scenario?.challenge.mediaPath} alt={scenario?.challenge.mediaPath}></img>
+                <div className="scenario-page-title">
+                    {scenario?.title}
+                </div>    
+                <div className="scenario-page-subtitle">
+                    {scenario?.subtitle}
+                </div>
+            </div>}
         </div>
         
     )

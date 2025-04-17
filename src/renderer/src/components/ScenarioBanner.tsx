@@ -2,8 +2,6 @@ import "./scenario.css";
 import { Link } from "react-router";
 
 function ScenarioBanner({scenario}): JSX.Element {
-  // const [scenario, setScenario] = useState<Scenario>();
-  
 
   return (
     <Link to={"/scenarios/"+scenario.id}>
