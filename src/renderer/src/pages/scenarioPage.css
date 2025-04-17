@@ -52,9 +52,13 @@
 
 }
 
-.scenario-page-success-continue-button {
+.scenario-page-success-button-bar {
     position: absolute;
     right: 0.5rem;
     bottom: 0.5rem;
-    background-color: blue;
+    display:flex;
+    gap: 0.5rem;
+    .scenario-page-success-button-bar {
+        background-color: blue;
+    }
 }

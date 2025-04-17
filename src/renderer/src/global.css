@@ -5,6 +5,9 @@ body{
 #root {
     width: 100vw;
     height: 100vh;
+
+    --primary-color: #00B7FF;
+    --secondary-color: white;
 }
 button {
     background-color: white;
@@ -16,5 +19,12 @@ button {
     box-shadow: 1px 1px 5px 1px #00000044;
 }
 button:hover{
-    
+    filter:brightness(0.95);
+}
+
+.dd-btn-primary {
+    background-color: var(--primary-color);
+}
+.dd-btn-secondary {
+    background-color: var(--secondary-color);
 }

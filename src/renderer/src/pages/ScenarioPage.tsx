@@ -5,7 +5,6 @@ import "./scenarioPage.css";
 import ScenarioBanner from "@renderer/components/ScenarioBanner";
 import Modal from 'react-modal';
 
-
 export const ScenarioPage = () =>  {
     const { scenarioId } = useParams();
 
@@ -72,11 +71,16 @@ export const ScenarioPage = () =>  {
                 <div className="scenario-page-success-text">
                     {scenario?.successData.text}
                 </div>
-                <Link to={"/"}>
-                    <button className="scenario-page-success-continue-button">
-                        {"Continuar >"}
+                <div className="scenario-page-success-button-bar">
+                    <button className="scenario-page-success-retry-button dd-btn-secondary">
+                        {"Reintentar"}
                     </button>
-                </Link>
+                    <Link to={"/"}>
+                        <button className="scenario-page-success-continue-button dd-btn-primary">
+                            {"Continuar >"}
+                        </button>
+                    </Link>
+                </div>    
             </div>
             </Modal>
             <Modal
