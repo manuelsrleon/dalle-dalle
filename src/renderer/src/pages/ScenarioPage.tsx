@@ -38,14 +38,14 @@ export const ScenarioPage = () =>  {
             </div>
             :
             
-            <div className="scenario-page-prompt">
+            <div className="scenario-page-challenge">
                 <img src={scenario?.challenge.mediaPath} alt={scenario?.challenge.mediaPath}></img>
-                <div className="scenario-page-title">
+                <div className="scenario-page-challenge-title">
                     {scenario?.title}
                 </div>    
-                <div className="scenario-page-subtitle">
+                {/* <div className="scenario-page-subtitle">
                     {scenario?.subtitle}
-                </div>
+                </div> */}
             </div>}
         </div>
         
