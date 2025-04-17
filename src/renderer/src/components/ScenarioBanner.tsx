@@ -1,5 +1,3 @@
-import Scenario from "@renderer/model/scenario/scenario";
-
 import "./scenario.css";
 import { Link } from "react-router";
 
