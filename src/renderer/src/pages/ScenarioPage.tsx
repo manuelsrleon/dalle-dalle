@@ -7,15 +7,19 @@ export const ScenarioPage = () =>  {
     const { scenarioId } = useParams();
 
     const [scenario, setScenario] = useState<Scenario>();
+    const [error, setError] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-    // const loadScenario: Scenario = () => {
-    //     const scenario: Scenario;
-    //     return scenario;
-    // }
-    // useEffect(() => {
-    //     setScenario(loadScenario());
-    // },[])
+    useEffect(() => {
+        setIsLoading(true);
+        if(scenarioId){
+            window.electron.loadScenario(scenarioId).then( 
+                results => setScenario(results as Scenario), 
+                reject => setError(reject)
+            );
+        }
+    },[])
 
     return (
 

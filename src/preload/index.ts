@@ -11,7 +11,7 @@ if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', {
       loadSavedScenarios: async () => ipcRenderer.invoke('load-saved-scenarios'),
-      loadSavedScenario: async () => ipcRenderer.invoke('load-scenario')
+      loadScenario: async (scenarioId: string) => ipcRenderer.invoke('load-scenario', scenarioId)
     },
       )
     contextBridge.exposeInMainWorld('api', api)

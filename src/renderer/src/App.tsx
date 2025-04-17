@@ -21,7 +21,6 @@ function App(): JSX.Element {
         await window.electron
         .loadSavedScenarios()
         .then(results =>  Promise.all(results.map(scenarioQueryResultToScenarioMapper)))
-      console.log(scenarios);
       setScenarios(scenarios);
     } catch (err: any) {
       setError(err.message);
@@ -70,7 +69,6 @@ function App(): JSX.Element {
       } as FailureData,
       settings: undefined
     }
-    console.log(mappedScenario);
     return mappedScenario;
   }
   return (

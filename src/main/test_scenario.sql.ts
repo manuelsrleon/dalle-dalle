@@ -1,7 +1,6 @@
 export const testScenario1 = 
     "INSERT INTO SCENARIO VALUES (" +
-    '\'STANDARD,\'' + 
-    '\'Por que chora a nena?\',' +
+    '\'STANDARD\',' +
     '\'Resolve a situación da nena\',' +
     '\'¿Que necesita a nena?\',' +
     '\'path/to/image.png\',' +

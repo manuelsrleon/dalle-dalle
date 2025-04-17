@@ -7,6 +7,7 @@ import Scenario from '../common/model/scenario/scenario';
 import ChallengeData from '../common/model/scenario/challenge-data';
 import FailureData from '../common/model/scenario/failure-data';
 import SuccessData from '../common/model/scenario/success-data';
+import { M } from 'vite/dist/node/types.d-aGj9QkWt';
 
 
 const sqlite3 = require('sqlite3').verbose();
@@ -98,14 +99,26 @@ app.whenReady().then(() => {
 
   });
 
-  ipcMain.handle('load-scenario', async (event, args) => {
-    
-    let scenarioId = args['scenarioId'];
-
-    const scenarioQR = await db.get(`SELECT rowid, * from SCENARIO where rowid = ${scenarioId}`);
-
-    return scenarioQueryResultToScenarioMapper(scenarioQR);
-  })
+  ipcMain.handle('load-scenario', async (event, scenarioId) => {
+    return new Promise((resolve, reject) => {
+      db.get(`SELECT rowid, * FROM SCENARIO WHERE rowid = ?`, [scenarioId], (err, row) => {
+        if (err) {
+          console.error("DB error:", err);
+          reject(err);
+          return;
+        }
+  
+        if (row) {
+          console.log("Row:", row);
+          const mapped = scenarioQueryResultToScenarioMapper(row as ScenarioQueryResult);
+          resolve(mapped);
+        } else {
+          resolve(null); 
+        }
+      });
+    });
+  });
+  
   
   type ScenarioQueryResult = {
     rowid: string;
@@ -150,7 +163,6 @@ app.whenReady().then(() => {
       } as FailureData,
       settings: undefined
     }
-    console.log(mappedScenario);
     return mappedScenario;
   }
   createWindow()

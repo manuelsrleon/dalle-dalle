@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="/scenarios/:id" element={<ScenarioPage/>} />
+      <Route path="/scenarios/:scenarioId" element={<ScenarioPage/>} />
     </Routes>
     </BrowserRouter>
   </React.StrictMode>
