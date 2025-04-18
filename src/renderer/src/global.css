@@ -5,7 +5,10 @@
 html {
     --primary-color: #00B7FF;
     --secondary-color: white;
+    --text-color: white;
     font-family: 'Pacifico', 'sans-serif';
+    color: var(--text-color);
+    --default-page-margin: 1rem
 }
 
 body{
@@ -38,4 +41,27 @@ button:active {
 }
 .dd-btn-secondary {
     background-color: var(--secondary-color);
+}
+
+.dd-page {
+    margin: 1rem;
+}
+
+.dd-input, input {
+    background-color: white;
+    border: none;
+    border-radius: 0.2rem;
+    height:1.5rem;
+    
+    :hover {
+
+    }
+
+    :active {
+
+    }
+}
+
+.dd-form {
+    
 }

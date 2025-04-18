@@ -1,0 +1,21 @@
+{
+    type: "STANDARD",
+    title: "A nena chora",
+    subtitle: "Podes resolvelo?"
+    challenge: {
+        prompt: "¿Que necesita a nena?",
+        mediaPath: "nena.png",
+        soundPath: "chorar.ogg",
+    },
+    onSuccess: {
+        successText: "Porque necesita ir ó baño!",
+        mediaPath: "abejita.mp4",
+        sound: "campana.ogg",
+        successRfidCode: ""
+    },
+    onFailure: {
+        text: "Ups! Iso non é!",
+        mediaPath: "perigo.png",
+        soundPath: "incorrecto.ogg"
+    }
+}
