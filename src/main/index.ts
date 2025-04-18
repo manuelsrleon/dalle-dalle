@@ -29,6 +29,7 @@ db.serialize(() => {
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    title: "dalle-dalle",
     width: 900,
     height: 670,
     show: false,

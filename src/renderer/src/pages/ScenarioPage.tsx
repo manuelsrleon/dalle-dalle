@@ -1,20 +1,24 @@
 import Scenario from "../../../common/model/scenario/scenario";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router"
+import { Link, useNavigate, useParams } from "react-router"
 import "./scenarioPage.css";
+import "../global.css"
 import ScenarioBanner from "@renderer/components/ScenarioBanner";
 import Modal from 'react-modal';
 
 export const ScenarioPage = () =>  {
     const { scenarioId } = useParams();
+    let navigate = useNavigate();
 
     const [scenario, setScenario] = useState<Scenario>();
     const [error, setError] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-    const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(true);
+    const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(false);
     const [isFailureModalOpen, setIsFailureModalOpen] = useState<boolean>(false);
+
+
 
     useEffect(() => {
         console.log("scenarioId:",scenarioId);
@@ -56,7 +60,7 @@ export const ScenarioPage = () =>  {
     }
 
     const onContinue = () => {
-        
+        navigate("/");
     }
     return (
         <div className="scenario-page-container">
@@ -76,7 +80,8 @@ export const ScenarioPage = () =>  {
                         {"Reintentar"}
                     </button>
                     <Link to={"/"}>
-                        <button className="scenario-page-success-continue-button dd-btn-primary">
+                        <button className="scenario-page-success-continue-button dd-btn-primary"
+                            onClick={onContinue}>
                             {"Continuar >"}
                         </button>
                     </Link>
@@ -84,8 +89,8 @@ export const ScenarioPage = () =>  {
             </div>
             </Modal>
             <Modal
-                isOpen={isFailureModalOpen}>
-                style={modalStyle}
+                isOpen={isFailureModalOpen}
+                style={modalStyle} >
                 <div className="scenario-page-failure-modal">
                     <img className= "scenario-page-success-img" 
                         src={scenario?.failureData.mediaPath} alt={scenario?.failureData.mediaPath}>

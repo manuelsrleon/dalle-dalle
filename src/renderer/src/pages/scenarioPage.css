@@ -47,8 +47,8 @@
 .scenario-page-success-img, .scenario-page-failure-img{
     margin:2rem;
 }
-.scenario-page-success-text, .scenario-page-success {
-    font-size: 5rem;
+.scenario-page-success-text, .scenario-page-failure-text {
+    font-size: 4rem;
 
 }
 

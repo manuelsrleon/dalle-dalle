@@ -6,7 +6,7 @@ import "./app.css"
 import ChallengeData from '../../common/model/scenario/challenge-data';
 import SuccessData from '../../common/model/scenario/success-data';
 import FailureData from '../../common/model/scenario/failure-data';
-
+import { TopBar } from "./components/TopBar"
 
 function App(): JSX.Element {
   const [error, setError] = useState(null);

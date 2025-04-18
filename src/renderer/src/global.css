@@ -1,3 +1,8 @@
+html {
+    --primary-color: #00B7FF;
+    --secondary-color: white;
+}
+
 body{
     width: 100%;
     height: 100%;
@@ -5,9 +10,6 @@ body{
 #root {
     width: 100vw;
     height: 100vh;
-
-    --primary-color: #00B7FF;
-    --secondary-color: white;
 }
 button {
     background-color: white;
@@ -20,6 +22,10 @@ button {
 }
 button:hover{
     filter:brightness(0.95);
+    cursor:pointer;
+}
+button:active {
+    filter:brightness(0.90);
 }
 
 .dd-btn-primary {

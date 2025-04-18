@@ -1,0 +1,7 @@
+#top-bar{
+    display:flex;
+    justify-items: space-between;
+    height: 3rem;
+    box-shadow: 0px 0px 4px 1px #444;
+    color:white;
+}
