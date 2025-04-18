@@ -1,5 +1,8 @@
 import "./topbar.css"
 import "../global.css"
+import dalleDalleLogo from "../assets/dalle-dalle-light.png";
+
+
 import { useNavigate } from "react-router"
 
 export const TopBar = () => {
@@ -10,7 +13,7 @@ export const TopBar = () => {
         navigate("/");
     }
     return <div id="top-bar">
-        <img src="app-logo" onClick={onBannerClicked} alt="dalle-dalle" />
+        <img id="app-logo" src={dalleDalleLogo} onClick={onBannerClicked} alt="dalle-dalle" />
 
     </div>
 }

@@ -112,6 +112,7 @@ export const ScenarioPage = () =>  {
             
             <div className="scenario-page-challenge">
                 <img src={scenario?.challenge.mediaPath} alt={scenario?.challenge.mediaPath}></img>
+                <img src="/media/nena-chorando.jpg" className="challenge-img" alt="nena-chorando"></img>
                 <div className="scenario-page-challenge-title">
                     {scenario?.title}
                 </div>    

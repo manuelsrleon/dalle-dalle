@@ -1,6 +1,11 @@
+@font-face {
+    font-family: 'Pacifico', 'sans-serif';
+    src: url('/assets/Pacifico-regular.ttf');
+}
 html {
     --primary-color: #00B7FF;
     --secondary-color: white;
+    font-family: 'Pacifico', 'sans-serif';
 }
 
 body{
