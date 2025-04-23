@@ -26,7 +26,7 @@ export const NewScenarioPage = () => {
     }
 
     return <div className="new-scenario-page-container dd-page">
-        <h2>New Scenario</h2>
+        <h2>Nuevo escenario</h2>
         <form action="submit" className="dd-form">
             <label htmlFor="scenarioTitle">
                 Título de escenario
@@ -51,9 +51,10 @@ export const NewScenarioPage = () => {
                         <input id="maxTime" type="number" placeholder="0">
                         </input>
                     </div>
-                    <label htmlFor="rfidObjectCode">
+                    {/* <label htmlFor="rfidObjectCode">
                         Objeto de la solución
                     </label>
+                    <input type="text" id="rfidObjectCode" /> */}
                 </div>
                 <div className="new-scenario-section dd-card">
                     <h3>Al fallar...</h3>

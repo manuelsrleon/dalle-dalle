@@ -17,8 +17,10 @@
     cursor: pointer;
     transition: 0.2s ease-in-out;
 }
-.scenario-img {
-    min-height: 6rem;
+.scenario-banner-img {
+    min-height: 4rem;
+    max-height: 6rem;
+    margin: auto;
     background-color: #0000;
 }
 a {

@@ -1,5 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import Scenario from '../common/model/scenario/scenario'
 
 // Custom APIs for renderer
 const api = {}
@@ -11,7 +12,8 @@ if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', {
       loadSavedScenarios: async () => ipcRenderer.invoke('load-saved-scenarios'),
-      loadScenario: async (scenarioId: string) => ipcRenderer.invoke('load-scenario', scenarioId)
+      loadScenario: async (scenarioId: string) => ipcRenderer.invoke('load-scenario', scenarioId),
+      createScenario: async (scenario: Scenario) => ipcRenderer.invoke('create-scenario', scenario)
     },
       )
     contextBridge.exposeInMainWorld('api', api)
@@ -23,7 +25,8 @@ if (process.contextIsolated) {
   // @ts-ignore (define in dts)
   window.electron = {...electronAPI, 
     loadSavedScenarios: async () => ipcRenderer.invoke('load-saved-scenarios'),
-    loadScenario: async (scenarioId: string) => ipcRenderer.invoke('load-scenario', scenarioId)
+    loadScenario: async (scenarioId: string) => ipcRenderer.invoke('load-scenario', scenarioId),
+    createScenario: async (scenario: Scenario) => ipcRenderer.invoke('create-scenario', scenario)
   }
   // @ts-ignore (define in dts)
   window.api = api

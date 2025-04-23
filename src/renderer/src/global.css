@@ -24,7 +24,10 @@ button {
     color: black;
     font-weight: bold;
     padding: 1rem;
-    border-radius: 0.5rem;
+    border-radius: 100rem;
+    max-height:24px;
+    text-align: center;
+    line-height: 0px;
     border: 0px solid black;
     box-shadow: 1px 1px 5px 1px #00000044;
 }
@@ -38,6 +41,7 @@ button:active {
 
 .dd-btn-primary {
     background-color: var(--primary-color);
+    color: white;
 }
 .dd-btn-secondary {
     background-color: var(--secondary-color);

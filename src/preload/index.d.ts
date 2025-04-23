@@ -10,5 +10,6 @@ declare global {
   interface ElectronAPI {
     loadSavedScenarios: () => Promise<Scenario[]>;
     loadScenario: (scenarioId: string) => Promise<Scenario>;
+    createScenario: (scenario: Scenario) => Promise<Scenario>;
   }
 }

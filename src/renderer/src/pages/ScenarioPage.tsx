@@ -11,6 +11,9 @@ export const ScenarioPage = () =>  {
     let navigate = useNavigate();
 
     const [scenario, setScenario] = useState<Scenario>();
+    const [input, setInput] = useState<string>("");
+
+    
     const [error, setError] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -25,22 +28,48 @@ export const ScenarioPage = () =>  {
         setIsLoading(true);
         if(scenarioId){
             window.electron.loadScenario(scenarioId).then( 
-                results => {setScenario(results as Scenario);console.log("scenario:",scenario)}, 
+                results => {
+                    setScenario(results as Scenario);
+                    console.log("scenario:",scenario)
+                }, 
                 reject => setError(reject)
             );
         }
     },[])
 
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+          setInput((prevInput) => {
+            const newInput = (prevInput + e.key).slice(scenario ? (-scenario?.challenge.rfidObjectCode.length) : 0);
+            if (newInput === scenario?.challenge.rfidObjectCode) {
+              onSuccess();
+            }else if(newInput.length === scenario?.challenge.rfidObjectCode.length ){
+                onFailure();
+                return "";
+            }
+            return newInput;
+          });
+        };
+    
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, [scenario]);
+    
+    useEffect(() => {
+
+    }, [scenario])
     const playScenario = () => {
         setIsPlaying(true);
     }
+
     const modalStyle = { 
             content: {
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
                 minWidth: '700px',
-                minHeight: '600px'
+                minHeight: '600px',
+                color: 'black'
             },
             overlay: {
                 backgroundColor: 'transparent'
@@ -54,9 +83,8 @@ export const ScenarioPage = () =>  {
     const onFailure = () => {
         setIsFailureModalOpen(true);
         setTimeout(() => {
-            setIsFailureModalOpen(false),
-            3000
-        })
+            setIsFailureModalOpen(false)
+        }, 6000)
     }
 
     const onContinue = () => {
@@ -105,20 +133,22 @@ export const ScenarioPage = () =>  {
             <div className="scenario-page-cover">
                 <ScenarioBanner scenario={scenario}></ScenarioBanner>
                 <button className="scenario-page-play-scenario" onClick={playScenario}>
-                    Reproducir
+                    Resolver
                 </button>
             </div>
             :
             
             <div className="scenario-page-challenge">
-                <img src={scenario?.challenge.mediaPath} alt={scenario?.challenge.mediaPath}></img>
-                <img src="/media/nena-chorando.jpg" className="challenge-img" alt="nena-chorando"></img>
+                <img src={scenario?.challenge.mediaPath} alt={scenario?.challenge.mediaPath} className="challenge-img"></img>
                 <div className="scenario-page-challenge-title">
                     {scenario?.title}
                 </div>    
                 {/* <div className="scenario-page-subtitle">
                     {scenario?.subtitle}
-                </div> */}
+                    </div> */}
+                <div>
+                {input?.slice(scenario ? (-scenario?.challenge.rfidObjectCode) : 0)}
+                </div>
             </div>}
         </div>
     )

@@ -1,4 +1,4 @@
-import "./scenario.css";
+import "./scenario-banner.css";
 import { Link } from "react-router";
 
 function ScenarioBanner({scenario}): JSX.Element {
@@ -6,7 +6,7 @@ function ScenarioBanner({scenario}): JSX.Element {
   return (
     <Link to={"/scenarios/"+scenario.id}>
     <div className="scenario-banner">
-      <img className="scenario-img" src={scenario.challenge.mediaPath} alt="" />
+      <img className="scenario-banner-img" src={scenario.challenge.mediaPath} alt="" />
       <div className="scenario-description">
         <h5 className="scenario-title">
           {scenario.title}

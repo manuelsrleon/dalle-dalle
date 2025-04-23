@@ -19,11 +19,11 @@ db.serialize(() => {
   console.log(createScenarioTable);
   db.run(createScenarioTable);
   
-  console.log("Attempting to insert SCENARIO test data:")
-  console.log(testScenario1);
-  const stmt = db.prepare(testScenario1);
-  stmt.run()
-  stmt.finalize();
+  // console.log("Attempting to insert SCENARIO test data:")
+  // console.log(testScenario1);
+  // const stmt = db.prepare(testScenario1);
+  // stmt.run()
+  // stmt.finalize();
 });
 
 function createWindow(): void {
@@ -116,6 +116,29 @@ app.whenReady().then(() => {
     });
   });
   
+  ipcMain.handle('create-scenario', async (scenario: any) => {
+    return new Promise((resolve, reject) => {
+      db.run(
+          'insert into scenario values('+
+            '\'STANDARD\', ' +
+            '\'Que necesita a nena?\', ' +
+            '\'Subtitle\', ' +
+            '\'Prompt\', ' +
+            '\'/path/to/media\', ' +
+            '10, ' + 
+            '\'/path/to/sound\', ' +
+            '\'rfidCode\', ' +
+            '\'text\', ' +
+            '\'/path/to/media\', ' +
+            '\'/path/to/sound\', ' +
+            '\'failureText\', ' +
+            '\'/path/to/media\', ' +
+            '\'/path/to/sound\''
+        , (err) => {
+          return err
+        }) 
+    })
+  })
   
   type ScenarioQueryResult = {
     rowid: string;
