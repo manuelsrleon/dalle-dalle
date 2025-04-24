@@ -17,11 +17,11 @@ export const TopBar = () => {
     const onNewScenarioCreation = () => {
         navigate("scenarios/new");
     }
-    return <div id="top-bar">
+    return <div className="top-bar">
         <img id="app-logo" src={dalleDalleLogo} onClick={onBannerClicked} alt="dalle-dalle" />
         {location.pathname == "/"?
         <button className="new-scenario-button dd-btn-secondary" 
-            onClick={onNewScenarioCreation}>{"Add scenario"}
+            onClick={onNewScenarioCreation}>{"+ Add scenario"}
         </button>
         :
         <></>}

@@ -68,3 +68,63 @@
 .challenge-img {
     max-height: 50vh;
 }
+
+/* Overlay full screen + flex to center modal both vertically and horizontally */
+.ReactModal__Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    width: 100%;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;    /* Align to bottom */
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+    padding: 2rem;
+    box-sizing: border-box;
+    z-index: 1000;
+    inset: unset;
+  }
+  
+  /* Fade in/out */
+  .ReactModal__Overlay--after-open {
+    opacity: 1;
+  }
+  
+  .ReactModal__Overlay--before-close {
+    opacity: 0;
+  }
+  
+  /* Modal content: centered and jumps up from the bottom */
+  .ReactModal__Content {
+    position: static;  /* Change from absolute positioning */
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;  /* Adjust this width as needed */
+    margin: 0;
+    outline: none;
+    transform: translateY(100%);  /* Start from the bottom */
+    animation: jumpUp 400ms ease-out forwards;
+    inset: unset !important;
+  }
+  
+  /* Jump-up animation */
+  @keyframes jumpUp {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    60% {
+      transform: translateY(-20px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
