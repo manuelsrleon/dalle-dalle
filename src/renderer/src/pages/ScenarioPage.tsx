@@ -1,5 +1,5 @@
 import Scenario from "../../../common/model/scenario/scenario";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router"
 import "./scenarioPage.css";
 import "../global.css"
@@ -12,6 +12,8 @@ export const ScenarioPage = () =>  {
 
     const [scenario, setScenario] = useState<Scenario>();
     const [input, setInput] = useState<string>("");
+    const successAudioRef = useRef(new Audio('/media/sounds/success_default.wav'));
+    const failureAudioRef = useRef(new Audio('/media/sounds/failure_default.wav'));
 
     
     const [error, setError] = useState<boolean>(false);
@@ -69,7 +71,9 @@ export const ScenarioPage = () =>  {
                 transform: 'translate(-50%, -50%)',
                 minWidth: '700px',
                 minHeight: '600px',
-                color: 'black'
+                color: 'black',
+                borderRadius: '30px',
+                boxShadow: '0px 2px 10px 1px #0004'
             },
             overlay: {
                 backgroundColor: 'transparent'
@@ -78,13 +82,27 @@ export const ScenarioPage = () =>  {
     
     const onSuccess = () => {
         setIsSuccessModalOpen(true);
+        playSuccessSound();
     }
     
     const onFailure = () => {
         setIsFailureModalOpen(true);
+        playFailureSound();
         setTimeout(() => {
             setIsFailureModalOpen(false)
         }, 6000)
+    }
+    
+    const playSuccessSound = () => {
+        const audio = successAudioRef.current;
+        audio.currentTime = 0; 
+        audio.play().catch(err => console.error("Playback failed:",err));
+    }
+    //TODO refactor
+    const playFailureSound = () => {
+        const audio = failureAudioRef.current;
+        audio.currentTime = 0; 
+        audio.play().catch(err => console.error("Playback failed:", err));
     }
 
     const onContinue = () => {
