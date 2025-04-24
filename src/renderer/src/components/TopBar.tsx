@@ -21,7 +21,7 @@ export const TopBar = () => {
         <img id="app-logo" src={dalleDalleLogo} onClick={onBannerClicked} alt="dalle-dalle" />
         {location.pathname == "/"?
         <button className="new-scenario-button dd-btn-secondary" 
-            onClick={onNewScenarioCreation}>{"+ Add scenario"}
+            onClick={onNewScenarioCreation}>{"+ Crear escenario"}
         </button>
         :
         <></>}
