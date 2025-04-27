@@ -33,7 +33,7 @@
     color: white;
     
 }
-.scenario-page-success-modal, .scenario-page-failure-modal {
+.scenario-page-modal {
     display: flex;
     flex-direction: row;
     background-color: white;
@@ -44,12 +44,12 @@
     height: 90%;
     box-shadow: 5px 5px 10px 10px 10px black;
 }
-.scenario-page-success-img, .scenario-page-failure-img{
+.scenario-page-modal-img {
     margin:2rem;
     max-height: 20rem;
     width: auto;
 }
-.scenario-page-success-text, .scenario-page-failure-text {
+.scenario-page-modal-text{
     font-size: 4rem;
 
 }
@@ -128,3 +128,12 @@
     }
   }
   
+
+  .scenario-challenge-timer {
+    font-size: 36px;
+
+  }
+  .timer-hurry {
+    color: red;
+
+  }

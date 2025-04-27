@@ -19,6 +19,7 @@ export const NewScenarioPage = () => {
     const changeMaxTime = (quantity: number) => {
         
     }
+
     const submitNewScenario = () => {
         // if(validateScenario(newScenario)){
         //     window.electron.createNewScenario();
