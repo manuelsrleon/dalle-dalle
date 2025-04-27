@@ -147,10 +147,6 @@ export const ScenarioPage = () =>  {
         setIsOutOfTimeModalOpen(false);
         setInput("");
     }
-
-    const returnHome = () => {
-
-    }
     
     const playSuccessSound = () => {
         const audio = successAudioRef.current;
