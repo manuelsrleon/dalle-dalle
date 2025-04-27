@@ -140,6 +140,13 @@ export const ScenarioPage = () =>  {
     const onOutOfTime = () => {
         setIsOutOfTimeModalOpen(true);
     }
+    const onRetry = () => {
+        setIsPlaying(false);
+        setIsSuccessModalOpen(false);
+        setIsFailureModalOpen(false);
+        setIsOutOfTimeModalOpen(false);
+        setInput("");
+    }
 
     const returnHome = () => {
 
@@ -178,7 +185,8 @@ export const ScenarioPage = () =>  {
                     {scenario?.successData.text}
                 </div>
                 <div className="scenario-page-success-button-bar">
-                    <button className="scenario-page-success-retry-button dd-btn-secondary">
+                    <button className="scenario-page-success-retry-button dd-btn-secondary"
+                        onClick={onRetry}>
                         {"Reintentar"}
                     </button>
                     <Link to={"/"}>
@@ -214,7 +222,8 @@ export const ScenarioPage = () =>  {
                         {"Téntao outra vez!"}
                     </div>
                     <div className="scenario-page-success-button-bar">
-                    <button className="scenario-page-success-retry-button dd-btn-secondary">
+                    <button className="scenario-page-success-retry-button dd-btn-secondary"
+                        onClick={onRetry}>
                         {"Reintentar"}
                     </button>
                     <Link to={"/"}>
